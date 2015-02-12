@@ -6,7 +6,7 @@ var express = require('express'),
 
 var app = express(),
     env = process.env.NODE_ENV || 'development',
-    port = process.env.NODE_ENV ||3000;
+    port = process.env.PORT || 3000;
 
 if (env=='development'){
     mongoose.connect('mongodb://localhost/telerikacademycourses');
