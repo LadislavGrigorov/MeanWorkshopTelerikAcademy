@@ -6,9 +6,15 @@ var express = require('express'),
 
 var app = express(),
     env = process.env.NODE_ENV || 'development',
-    port = 3000;
+    port = process.env.NODE_ENV ||3000;
 
-mongoose.connect('mongodb://localhost/telerikacademycourses');
+if (env=='development'){
+    mongoose.connect('mongodb://localhost/telerikacademycourses');
+}
+else{
+    mongoose.connect('mongodb://pesho:gosho@ds039341.mongolab.com:39341/telerikacademycourses');
+}
+
 var db = mongoose.connection;
 var messageFromDb;
 
