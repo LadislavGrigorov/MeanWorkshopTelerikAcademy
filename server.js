@@ -16,8 +16,6 @@ else{
 }
 
 var db = mongoose.connection;
-var messageFromDb;
-
 db.once('open', function (err) {
     if (err) {
         console.log(err);
@@ -31,29 +29,6 @@ db.on('error', function (err) {
     console.log(err);
 });
 
-var messageSchema = mongoose.Schema({
-    message: String
-});
-
-var Message = mongoose.model('Message', messageSchema);
-
-Message.remove({}).exec(function (err) {
-    if (err) {
-        console.log('Message can not be cleared: ' + err);
-        return;
-    }
-
-    console.log('Messages deleted...')
-
-    Message.create({message: 'Hi from mongosose'})
-        .then(function (model) {
-            if (model) {
-                messageFromDb = model.message;
-                console.log(model.message);
-            }
-        });
-});
-
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/server/views');
 app.use(logger('dev'));
@@ -65,7 +40,7 @@ app.get('/partials/:partialName', function (req, res) {
 });
 
 app.get('*', function (req, res) {
-    res.render('index', {message: messageFromDb});
+    res.render('index');
 });
 
 app.listen(port);

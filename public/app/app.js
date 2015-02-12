@@ -10,6 +10,3 @@ app.config(function ($routeProvider, $locationProvider) {
         })
 });
 
-app.controller('MainCtrl', function ($scope) {
-    $scope.hello = 'Hi from angular';
-});
